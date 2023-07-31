@@ -1,2 +1,2 @@
-# dat-parser
-a DAT file parser for CMG output
+# cmg-data-parser
+A parser to convert CMG .gslib file into .txt file
