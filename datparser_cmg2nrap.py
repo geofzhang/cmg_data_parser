@@ -60,7 +60,6 @@ def process_large_dat_file(input_file, output_file, progress_var):
             if year and data_lines:
                 process_chunk(year, data_lines[7], data_lines[8:], output_file, write_headers)
 
-        messagebox.showinfo("Processing Complete", f"File {input_file} processed successfully!")
     except Exception as e:
         messagebox.showerror("Error", f"An error occurred while processing {input_file}:\n{str(e)}")
 
@@ -84,17 +83,29 @@ def process_large_dat_files(input_files):
             progress_bar.destroy()
 
 
-def select_input_files():
+def load_input_files():
     input_files = filedialog.askopenfilenames(
         title="Select Input Files",
         filetypes=[("GSlib Files", "*.gslib")]
     )
     if input_files:
         process_large_dat_files(input_files)
+        messagebox.showinfo("Processing Complete", f"Files processed successfully!")
 
+def select_input_files():
+    load_button = tk.Button(root, text="Load .gslib files", command=load_input_files)
+    load_button.pack(pady=10)
+
+    root.mainloop()
 
 if __name__ == "__main__":
     root = tk.Tk()
-    root.withdraw()  # Hide the main window
+    root.title('CMG Data Parser')
+    root.geometry("300x200")
+
+    status_var = tk.StringVar()
+    status_var.set("Waiting for files to be processed...")
+    status_label = tk.Label(root, textvariable=status_var)
+    status_label.pack(pady=20)
 
     select_input_files()
