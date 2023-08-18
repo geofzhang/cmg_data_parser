@@ -106,14 +106,14 @@ def process_large_dat_file(input_file, output_file, progress_var, filter_k=None)
 
 def process_large_dat_files(input_files):
     filter_k_values = [k.strip() for k in k_var.get().split(',')]
-    print(filter_k_values)
     for input_file in input_files:
         if input_file.endswith(".gslib"):
             input_folder = os.path.dirname(input_file)
             output_folder = os.path.join(input_folder, "output")  # Set the output folder to 'output' under the input folder
             os.makedirs(output_folder, exist_ok=True)
             file_name = os.path.splitext(os.path.basename(input_file))[0]
-            output_file = os.path.join(output_folder, file_name + "_nrap.txt")
+            k_suffix = "_".join(filter_k_values)
+            output_file = os.path.join(output_folder, f"{file_name}_k_{k_suffix}_nrap.txt")
 
             # Create a progress bar
             progress_var = tk.DoubleVar()
