@@ -37,6 +37,8 @@ def format_property(header):
         formatted_header = 'CO2_Sat'
     elif header == 'Pres_drop_from_time_zero':
         formatted_header = 'Pres_drop'
+    else:
+        formatted_header = header
     return formatted_header
 
 def process_chunk(year, property, data_lines, output_file, write_headers=False):
